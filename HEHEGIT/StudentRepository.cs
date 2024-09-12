@@ -17,8 +17,8 @@ namespace CallOfDuty
             foreach (var line in lines)
             {
                 var cols = line.Split(';');
-                Students.Add(new Student { Name = cols[0], Info = cols[1], DutyOrNo = cols[2] });
+                Students.Add(new Student { Name = cols[0], Info = cols[1], DutyString = "ДЕЖ" });
             }
-        }        
+        }
     }
 }

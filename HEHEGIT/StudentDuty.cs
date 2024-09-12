@@ -1,4 +1,5 @@
 ﻿
+using CallOfDuty.menu;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -26,12 +27,23 @@ namespace CallOfDuty
 
         public List<Student> GetRandomStudents(int count, Dictionary<Student, bool>.KeyCollection except = null)
         {
+            CommandAddStudent addStudent = new CommandAddStudent();
             var selectFrom = db.Students;
             if (except != null) 
                 selectFrom = selectFrom.Except(except).ToList();
 
             if (selectFrom.Count < count)
-                throw new StudentDutyException("Нужно больше студентов");
+            {
+                addStudent.AddStudent("Students.txt");
+                {
+                    if (selectFrom.Count < count)
+                    {
+                        addStudent.AddStudent("Students.txt");
+                        if (selectFrom.Count < count)
+                            throw new StudentDutyException("Нужно больше студентов");
+                    }
+                }
+            }
 
             var list = selectFrom.
                 Select(s=>(student: s, count: GetDutyCount(s))).
@@ -61,7 +73,6 @@ namespace CallOfDuty
             }
             return result;
         }
-
         public int GetDutyCount(Student student)
         {
             string path = Path.Combine(Environment.CurrentDirectory, folder, $"{student.Info}.json");

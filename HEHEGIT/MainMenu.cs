@@ -21,7 +21,7 @@ namespace CallOfDuty
         }
         private string GetStudentInfo(Student student, ref int index)
         {
-            return $"#{index++} {student.Name} {student.Info} {student.DutyOrNo}";
+            return $"#{index++} {student.Name} {student.Info} {student.DutyString}";
         }
         public void Run()
         {
@@ -29,7 +29,7 @@ namespace CallOfDuty
             {
                 int index = 1;
                 foreach (var student in todayDuty.Students)
-                    Console.WriteLine($"#{index++} {student.Name} {student.Info} {student.DutyOrNo}");
+                    Console.WriteLine($"#{index++} {student.Name} {student.Info} {student.DutyString}");
 
                 Console.WriteLine("Укажите индекс студента и через пробел знак + или - для подтверждения или отмены участия студента в святом дежурстве");
 
@@ -61,8 +61,8 @@ namespace CallOfDuty
             Console.WriteLine("Дежурные сегодня:");
             foreach (var student in todayDuty.Students)
             {
-                student.DutyOrNo.Replace("НЕД", "Дежурил");
-                Console.WriteLine($"{student.Name} {student.Info} {student.DutyOrNo}");
+                student.DutyString = "ДЕЖ";
+                Console.WriteLine($"{student.Name} {student.Info} {student.DutyString}");
             }
         }
     }

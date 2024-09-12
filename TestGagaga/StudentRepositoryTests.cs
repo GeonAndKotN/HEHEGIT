@@ -11,9 +11,9 @@ namespace CallOfDuty.Tests
         List<Student> GetTestStudents()
         {
             return new List<Student> {
-                new Student{ Name = "Валера", Info = "test1" },
-                new Student{ Name = "Серега", Info = "test2" },
-                new Student{ Name = "Валера", Info = "test3" }
+                new Student{ Name = "Валера", Info = "test1", DutyString = "ДЕЖ" },
+                new Student{ Name = "Серега", Info = "test2", DutyString = "ДЕЖ" },
+                new Student{ Name = "Валера", Info = "test3", DutyString = "ДЕЖ" }
             };
         }
 
@@ -38,6 +38,7 @@ namespace CallOfDuty.Tests
             {
                 Assert.That(db.Students[i].Name, Is.EqualTo(students[i].Name));
                 Assert.That(db.Students[i].Info, Is.EqualTo(students[i].Info));
+                Assert.That(db.Students[i].DutyString, Is.EqualTo(students[i].DutyString));
             }
         }
     }

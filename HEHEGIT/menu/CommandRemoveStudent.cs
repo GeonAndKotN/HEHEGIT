@@ -6,20 +6,15 @@ using System.Threading.Tasks;
 
 namespace CallOfDuty.menu
 {
-    public class RemoveStudent
+    public  class CommandRemoveStudent
     {
-        public void removeStudent(string file)
+        public  void removeStudent(string file, Student student)
         {
             CommandListStudents showstudent = new CommandListStudents();
             showstudent.ShowStudents(file);
 
-            Console.Write("Введите фамилию студента для удаления: ");
-            string firstName = Console.ReadLine();
-            Console.Write("Введите имя студента для удаления: ");
-            string lastName = Console.ReadLine();
-
             List<string> students = new List<string>(File.ReadAllLines(file));
-            string studentToRemove = $"{firstName};{lastName};НЕД";
+            string studentToRemove = $"{student.Name};{student.Info};{student.DutyString}";
 
             if (students.Remove(studentToRemove))
             {
@@ -27,6 +22,18 @@ namespace CallOfDuty.menu
                 Console.WriteLine("Студент успешно удалён!");
             }
             else Console.WriteLine("Йоу бро, нихрена не удалилось, что ты наделал?");
+        }
+        public  void removeStudent(string file)
+        {
+            Console.Write("Введите фамилию студента!");
+            var lastname = Console.ReadLine();
+            Console.Write("Введите имя студента!");
+            var name = Console.ReadLine();
+            var student = new Student()
+            {
+                Name = name, Info = lastname, DutyString = "НЕД"
+            };
+            removeStudent(file, student);
         }
     }
 }

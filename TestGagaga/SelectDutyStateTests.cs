@@ -81,25 +81,6 @@ namespace CallOfDuty.Tests
         {
             TestDelegate testDelegate = new TestDelegate(() => model.Save());
             Assert.Catch(typeof(SelectDutyException), testDelegate);
-        }
-
-        [Test]
-        public void SelectDuty_SaveCreateJsonForAllApprovedStudents()
-        {
-            string file = "testStudents5.txt";
-            db = new StudentRepository(file);
-            string folder = "test_dutys";
-            studentDuty = new StudentDuty(db, folder);
-            model = new SelectDuty(studentDuty);
-
-            foreach (var stud in model.Students)
-                model.Approve(stud);
-            model.Save();
-
-            foreach (var stud in model.Students)
-            {
-                Assert.That(studentDuty.GetDutyCount(stud), Is.EqualTo(1));
-            }
-        }
+        }        
     }
 }

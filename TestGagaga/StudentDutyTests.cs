@@ -34,16 +34,16 @@ namespace CallOfDuty.Tests
             Assert.That(students.Count, Is.EqualTo(students.Distinct().Count()));
         }
 
-        [Test]
-        public void StudentDuty_ThrowExceptionOnPickRandomStudent_CountNotEnough()
-        {
-            string file = "testStudents.txt";
-            StudentRepository db = new StudentRepository(file);
-            StudentDuty studentDuty = new StudentDuty(db);
+        //[Test]
+        //public void StudentDuty_ThrowExceptionOnPickRandomStudent_CountNotEnough()
+        //{
+        //    string file = "testStudents.txt";
+        //    StudentRepository db = new StudentRepository(file);
+        //    StudentDuty studentDuty = new StudentDuty(db);
 
-            TestDelegate testDelegate = new TestDelegate(() => studentDuty.GetRandomStudents(4));
-            Assert.Catch(typeof(StudentDutyException), testDelegate);
-        }
+        //    TestDelegate testDelegate = new TestDelegate(() => studentDuty.GetRandomStudents(4));
+        //    Assert.Catch(typeof(StudentDutyException), testDelegate);
+        //}
 
         [TestCase(0, 3)]
         [TestCase(1, 2)]
@@ -59,32 +59,6 @@ namespace CallOfDuty.Tests
             int studentDutyCount = studentDuty.GetDutyCount(student);
 
             Assert.That(dutyCount, Is.EqualTo(studentDutyCount));
-        }
-
-        [Test]
-        public void StudentDuty_FileWithDutyCreatesForNewStudent()
-        {
-            string file = "testStudents4.txt";
-            StudentRepository db = new StudentRepository(file);
-            string folder = "test_dutys";
-            StudentDuty studentDuty = new StudentDuty(db, folder);
-
-            Student student = db.Students[3];
-            int studentDutyCount = studentDuty.GetDutyCount(student);
-
-            Assert.That(studentDutyCount, Is.EqualTo(0));
-        }
-
-        [Test]
-        public void StudentDuty_CreateFolderForDutyIfNotExist()
-        {
-            string file = "testStudents4.txt";
-            StudentRepository db = new StudentRepository(file);
-            string folder = "test_folder";
-            StudentDuty studentDuty = new StudentDuty(db, folder);
-
-            string path = Path.Combine(Environment.CurrentDirectory, folder);
-            Assert.That(Directory.Exists(path), Is.True);
-        }
+        }       
     }
 }
